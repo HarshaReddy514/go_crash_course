@@ -180,4 +180,5 @@ func main() {
 	//Change value with pointer
 	*b = 10
 	fmt.Println(a)
+
 }
