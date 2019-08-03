@@ -6,11 +6,20 @@ package main
 import (
 	"fmt"
 	"math"
+	"net/http"
 )
 
 //functions
 func greeting(name string) string {
 	return "Hello " + name
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "<h1>Hello World</h1> <a href=/about>About</a>")
+}
+
+func about(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "<h1>About US</h1>")
 }
 
 func main() {
@@ -181,4 +190,7 @@ func main() {
 	*b = 10
 	fmt.Println(a)
 
+	http.HandleFunc("/", index)
+	http.HandleFunc("/about", about)
+	http.ListenAndServe(":3000", nil)
 }
